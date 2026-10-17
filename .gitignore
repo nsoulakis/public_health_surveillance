@@ -12,6 +12,14 @@ venv/
 Thumbs.db
 desktop.ini
 
-# Full datasets stay out of the repository
+# Full and intermediate datasets stay out of the repository
 data/raw/
+data/interim/
 *.sas7bdat
+
+# Kept on the author's computer for now
+sas/
+refs/
+
+# Tool caches
+.ruff_cache/

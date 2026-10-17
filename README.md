@@ -12,7 +12,17 @@ One method, two data sources:
 
 | Notebook | What it does | Run |
 |---|---|---|
-| [hello_world](notebooks/hello_world.ipynb) | Checks that the notebooks open and run in Google Colab | [Open in Colab](https://colab.research.google.com/github/nsoulakis/public_health_surveillance/blob/main/notebooks/hello_world.ipynb) |
+| [01_case_definitions](python/notebooks/01_case_definitions.ipynb) | Burn and head-injury case definitions applied to ten years of NEISS (3.5 million visits) | [Open in Colab](https://colab.research.google.com/github/nsoulakis/public_health_surveillance/blob/main/python/notebooks/01_case_definitions.ipynb) |
+| [hello_world](python/notebooks/hello_world.ipynb) | Checks that the notebooks open and run in Google Colab | [Open in Colab](https://colab.research.google.com/github/nsoulakis/public_health_surveillance/blob/main/python/notebooks/hello_world.ipynb) |
+
+## What's here
+
+| Folder | Contents |
+|---|---|
+| `python/` | Notebooks, shared functions (`utils/`) and scripts |
+| `data/` | Data sources and small demo samples, one subfolder per source (`neiss/`, `crime/`), shared by every language |
+
+Other languages will sit beside `python/` and share the same `data/`.
 
 ## How to run
 
@@ -22,6 +32,9 @@ One method, two data sources:
 ## Data
 
 Sources, versions and terms of use are in [data/SOURCES.md](data/SOURCES.md). Full datasets are not stored in this repository.
+
+- **Demo mode (default):** notebooks run on a 2% random sample in `data/demo/neiss/`, built by `python/scripts/make_demo_data.py` (seed 20003). Weights are scaled so national estimates stay on the full scale.
+- **Full mode:** the results shown on this page come from the full 2014–2023 files.
 
 ## Origin
 
