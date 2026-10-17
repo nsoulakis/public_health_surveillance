@@ -1,21 +1,11 @@
 # Data sources
 
-Full datasets are not stored in this repository. Each notebook states which data it used and the date the data ends.
-
 ## National Electronic Injury Surveillance System (NEISS)
 
-- **Publisher:** U.S. Consumer Product Safety Commission
-- **What it is:** a national probability sample of emergency department visits for consumer product injuries, with a statistical weight per record and a short narrative.
-- **Years used:** 2014–2023
-- **Where to get it:** the NEISS On-Line Query System, https://www.cpsc.gov/cgibin/neissquery/, section "Archived Annual NEISS Data". Choose a year and a file format. (Overview: https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data)
-- **File format:** CPSC publishes each year natively as a SAS data set (`neissYYYY.sas7bdat`), with a SAS formats file for the code labels. This repository reads those files as published, so analysts working in SAS and in Python start from the same files with no conversion. The code labels used here are in `data/demo/neiss/neiss_formats.csv`.
-- **To run at full scale:** download 2014–2023 in the SAS format and put the files in `data/raw/neiss/`. The notebooks then switch from demo mode to full mode automatically.
+- **Publisher:** U.S. Consumer Product Safety Commission (CPSC).
+- **What it is:** a national probability sample of hospital emergency department visits for consumer product–related injuries. Each record carries a statistical weight, the hospital's stratum and PSU, coded fields, and a short narrative.
+- **Years in this repository:** 2014–2025, every published year from 2014. The second diagnosis and body-part fields are absent from the 2014 file and empty until 2019; the case-definition notebook shows the effect.
+- **Where CPSC publishes it:** the NEISS On-Line Query System, https://www.cpsc.gov/cgibin/neissquery/, "Archived Annual NEISS Data" (overview: https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data). CPSC publishes each year as a SAS data set (`neissYYYY.sas7bdat`) with a formats file (`neiss_fmt.sas7bdat`).
+- **In this repository:** `data/neiss/neiss_YYYY.csv.gz` and `data/neiss/neiss_formats.csv`, written from CPSC's files by `python/scripts/extract_neiss.py`. All records and fields are kept; field names are lowercased, the sex field (published as `Sex`, or `gender` in 2023) is named `sex`, and whole-number codes are written without a decimal point.
+- **Documentation used:** NEISS Coding Manual (CPSC Only "Non-Trauma"), January 2025, rev. 1; Schroeder T, Ault K, *The NEISS Sample (Design and Implementation) 1997 to Present*, CPSC, 2001; CPSC, NEISS web estimates, https://www.cpsc.gov/cgibin/NEISSQuery/webestimates.html.
 - **Terms:** U.S. government public data.
-
-## Chicago Reported Crimes
-
-- **Publisher:** City of Chicago Data Portal, dataset "Crimes - 2001 to Present" (ID ijzp-q8t2)
-- **What it is:** reported incidents of crime in Chicago, one row per incident.
-- **Period used:** 2016-10-16 to 2026-10-08 (exported 2026-10-16; the portal's newest records lag by about a week).
-- **Where to get it:** https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2
-- **Terms:** City of Chicago Data Portal terms of use, shown on the portal.

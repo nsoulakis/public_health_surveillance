@@ -1,21 +1,6 @@
-"""Settings for the signals. Starting values; change them here and nowhere else."""
+"""Analysis settings. Change them here and nowhere else."""
 
-WINDOW = 14  # days in the moving baseline
-
-# z-score thresholds per series, from the original analysis
-THRESHOLDS = {
-    ("burn", "case_sum"): 3.46,
-    ("burn", "ratio_to_other"): 3.40,
-    ("burn", "wt_rto"): 3.34,
-    ("head_injury", "case_sum"): 2.75,
-    ("head_injury", "ratio_to_other"): 2.78,
-    ("head_injury", "wt_rto"): 2.70,
-}
-
-SEED = 20003
-
-# Chicago crime: starting values from the original crime analysis
-CRIME_THRESHOLDS = {
-    ("domestic", "case_sum"): 3.00,
-    ("domestic", "ratio_to_other"): 3.50,
-}
+WINDOW = 14  # days in the baseline (PHI_040)
+TARGET_RATE = 0.01  # one flag per 100 days (Nicholas's working heuristic)
+CALIBRATION = ("2014-01-01", "2018-12-31")  # k is chosen on these years ...
+EVALUATION = ("2019-01-01", "2025-12-31")  # ... and applied unchanged to these

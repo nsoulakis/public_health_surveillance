@@ -1,0 +1,24 @@
+name: check
+
+on: [push, pull_request]
+
+jobs:
+  clean-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install the pinned environment
+        run: pip install -r requirements.txt
+      - name: Lint
+        run: ruff check python tests
+      - name: Tests
+        run: pytest -q tests
+      - name: Run every notebook from a clean copy
+        run: |
+          mkdir -p /tmp/run
+          for nb in python/notebooks/*.ipynb; do
+            jupyter nbconvert --to notebook --execute "$nb" --output-dir /tmp/run
+          done
