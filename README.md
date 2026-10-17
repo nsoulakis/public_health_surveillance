@@ -36,7 +36,7 @@ Other languages will sit beside `python/` and share the same `data/`.
 Sources, versions and terms of use are in [data/SOURCES.md](data/SOURCES.md). Full datasets are not stored in this repository.
 
 - **Demo mode (default):** notebooks run on small files in `data/demo/`: a 2% random sample of visits (seed 20003, weights scaled to the full scale), full-data daily counts, and the records behind the line lists. Built by the scripts in `python/scripts/`.
-- **Full mode:** the results shown on this page come from the full 2014–2023 files.
+- **Full mode:** the results shown on this page come from the full 2014–2023 files. To reproduce them, download the yearly NEISS files as described in [data/SOURCES.md](data/SOURCES.md).
 
 ## Origin
 
