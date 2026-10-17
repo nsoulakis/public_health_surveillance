@@ -4,21 +4,26 @@ import numpy as np
 import pandas as pd
 
 
-def daily_series(df: pd.DataFrame, case_col: str) -> pd.DataFrame:
+def daily_series(df: pd.DataFrame, case_col: str, date_col: str = "trmt_date",
+                 weight_col: str | None = "wt") -> pd.DataFrame:
     """Daily counts, weighted counts and ratios for one case definition.
 
-    Columns: total, case_sum, non_case_sum, ratio_to_other (cases / non-cases),
-    wt_rto (weighted cases / weighted non-cases).
+    Columns: total, case_sum, non_case_sum, ratio_to_other (cases / non-cases), and,
+    when a weight column is given, wt_rto (weighted cases / weighted non-cases).
     """
     case = df[case_col] == 1
     non_case = df[case_col] == 0
-    g = df.assign(case=case, non_case=non_case,
-                  case_wt=df["wt"].where(case, 0), non_case_wt=df["wt"].where(non_case, 0))
-    daily = g.groupby("trmt_date").agg(
-        total=("case", "size"), case_sum=("case", "sum"), non_case_sum=("non_case", "sum"),
-        case_wt=("case_wt", "sum"), non_case_wt=("non_case_wt", "sum"))
+    g = df.assign(case=case, non_case=non_case)
+    agg = {"total": ("case", "size"), "case_sum": ("case", "sum"),
+           "non_case_sum": ("non_case", "sum")}
+    if weight_col:
+        g = g.assign(case_wt=df[weight_col].where(case, 0),
+                     non_case_wt=df[weight_col].where(non_case, 0))
+        agg |= {"case_wt": ("case_wt", "sum"), "non_case_wt": ("non_case_wt", "sum")}
+    daily = g.groupby(date_col).agg(**agg)
     daily["ratio_to_other"] = daily["case_sum"] / daily["non_case_sum"]
-    daily["wt_rto"] = daily["case_wt"] / daily["non_case_wt"]
+    if weight_col:
+        daily["wt_rto"] = daily["case_wt"] / daily["non_case_wt"]
     return daily
 
 

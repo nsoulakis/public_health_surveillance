@@ -14,6 +14,7 @@ One method, two data sources:
 |---|---|---|
 | [01_case_definitions](python/notebooks/01_case_definitions.ipynb) | Burn and head-injury case definitions applied to ten years of NEISS (3.5 million visits) | [Open in Colab](https://colab.research.google.com/github/nsoulakis/public_health_surveillance/blob/main/python/notebooks/01_case_definitions.ipynb) |
 | [02_signals](python/notebooks/02_signals.ipynb) | Daily baselines and z-score flags for burns and head injuries; line lists for the strongest flags (July 4 fireworks burns stand out every year) | [Open in Colab](https://colab.research.google.com/github/nsoulakis/public_health_surveillance/blob/main/python/notebooks/02_signals.ipynb) |
+| [03_crime_signals](python/notebooks/03_crime_signals.ipynb) | The same signals on ten years of Chicago crime reports (domestic incidents); the line list separates a real New Year's rise from a data artifact | [Open in Colab](https://colab.research.google.com/github/nsoulakis/public_health_surveillance/blob/main/python/notebooks/03_crime_signals.ipynb) |
 | [hello_world](python/notebooks/hello_world.ipynb) | Checks that the notebooks open and run in Google Colab | [Open in Colab](https://colab.research.google.com/github/nsoulakis/public_health_surveillance/blob/main/python/notebooks/hello_world.ipynb) |
 
 ## What's here
@@ -34,7 +35,7 @@ Other languages will sit beside `python/` and share the same `data/`.
 
 Sources, versions and terms of use are in [data/SOURCES.md](data/SOURCES.md). Full datasets are not stored in this repository.
 
-- **Demo mode (default):** notebooks run on small files in `data/demo/neiss/`: a 2% random sample of visits (seed 20003, weights scaled to the full scale), full-data daily counts, and the case records behind the line lists. Built by the scripts in `python/scripts/`.
+- **Demo mode (default):** notebooks run on small files in `data/demo/`: a 2% random sample of visits (seed 20003, weights scaled to the full scale), full-data daily counts, and the records behind the line lists. Built by the scripts in `python/scripts/`.
 - **Full mode:** the results shown on this page come from the full 2014–2023 files.
 
 ## Origin

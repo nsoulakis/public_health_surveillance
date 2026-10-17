@@ -13,3 +13,9 @@ THRESHOLDS = {
 }
 
 SEED = 20003
+
+# Chicago crime: starting values from the original crime analysis
+CRIME_THRESHOLDS = {
+    ("domestic", "case_sum"): 3.00,
+    ("domestic", "ratio_to_other"): 3.50,
+}
