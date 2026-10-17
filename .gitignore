@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Full datasets stay out of the repository
+data/raw/
+*.sas7bdat
