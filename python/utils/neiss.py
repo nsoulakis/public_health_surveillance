@@ -82,3 +82,27 @@ def case_counts(df: pd.DataFrame, definitions: list[str]) -> pd.DataFrame:
             "national_estimate": round(df.loc[col == 1, "wt"].sum()),
         })
     return pd.DataFrame(rows)
+
+
+def read_records(folder, dates) -> pd.DataFrame:
+    """Read every visit (with narrative) on the given treatment dates."""
+    dates = pd.to_datetime(pd.Series(list(dates)))
+    frames = []
+    for year in sorted(dates.dt.year.unique()):
+        path = sorted(Path(folder).glob(f"neiss{year}.*"))[0]
+        df = read_year(path, keep_narrative=True)
+        frames.append(df[df["trmt_date"].isin(dates)])
+    return pd.concat(frames, ignore_index=True)
+
+
+def label(df: pd.DataFrame, formats: pd.DataFrame) -> pd.DataFrame:
+    """Replace NEISS codes with their labels for display."""
+    out = df.copy()
+    pairs = {"sex": "GENDER", "bdpt": "BDYPT", "diag": "DIAG", "disp": "DISP",
+             "loc": "LOC", "prod1": "PROD"}
+    for col, fmt in pairs.items():
+        if col in out:
+            f = formats[formats["FMTNAME"] == fmt]
+            mapping = dict(zip(f["START"].astype(str), f["LABEL"]))
+            out[col] = out[col].map(lambda v: mapping.get(str(int(v)), v) if pd.notna(v) else v)
+    return out
